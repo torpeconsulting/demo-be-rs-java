@@ -6,7 +6,8 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-
+import javax.ws.rs.core.GenericEntity;
+import javax.ws.rs.core.Response;
 import com.torpeconsulting.demos.rest.model.BankAccount;
 import com.torpeconsulting.demos.rest.service.BankAccountsService;
 
@@ -29,9 +30,11 @@ public class BankAccountsResource {
     @GET
     @Path("/list/{owner}")
     @Produces({ "application/json" })
-    public List<BankAccount> getAllBankAccounts(@PathParam("owner") String owner) {
+    public Response getAllBankAccounts(@PathParam("owner") String owner) {
         List<BankAccount> bankaccounts = bankAccountsService.getAllAccounts("user1");
-        return bankaccounts;
+
+        GenericEntity<List<BankAccount>> entity = new GenericEntity<List<BankAccount>>(bankaccounts) { };
+        return Response.ok(entity).build();
     }
 
 }

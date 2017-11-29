@@ -4,6 +4,8 @@ import org.junit.Before;
 import org.junit.After;
 
 import com.torpeconsulting.demos.rest.HealthCheckResource;
+import com.fasterxml.jackson.annotation.JacksonAnnotation;
+import com.fasterxml.jackson.jaxrs.json.annotation.JacksonFeatures;
 import com.torpeconsulting.demos.rest.BankAccountsResource;
 
 import java.net.URI;
@@ -22,8 +24,8 @@ public class RestTest {
             .register(HealthCheckResource.class)
             .register(BankAccountsResource.class)
             .register(UserPreferencesResource.class)
-            .register(new DependencyBinder());
-            
+            .register(new DependencyBinder())
+            .register(MarshallingFeature.class);
 
         httpServer = GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), resourceConfig);
         httpServer.start();    
