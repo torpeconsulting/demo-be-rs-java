@@ -1,17 +1,38 @@
 package com.torpeconsulting.demos.rest;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.Before;
+import org.junit.After;
 
-import io.restassured.RestAssured;
-import static io.restassured.RestAssured.given;
+import com.torpeconsulting.demos.rest.HealthCheckResource;
+import com.torpeconsulting.demos.rest.BankAccountsResource;
+
+import java.net.URI;
+import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
+import org.glassfish.grizzly.http.server.HttpServer;
 
 public class RestTest {
     
-    @BeforeClass
-    public static void setup() {
-        RestAssured.port = Integer.valueOf(8080);
-        RestAssured.basePath = "/demo/rest/v1/";
-        RestAssured.baseURI = "http://localhost";
+    private static final String BASE_URI = "http://localhost:8080/";
+    private HttpServer httpServer;
+
+    @Before
+    public void setUp() throws Exception {
+        ResourceConfig resourceConfig = new ResourceConfig()
+            .register(HealthCheckResource.class)
+            .register(BankAccountsResource.class)
+            .register(UserPreferencesResource.class)
+            .register(new DependencyBinder());
+            
+
+        httpServer = GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), resourceConfig);
+        httpServer.start();    
+    }
+    
+    @After
+    public void tearDown() {
+        if (httpServer != null) {
+            httpServer.shutdownNow();
+        }
     }
 }
