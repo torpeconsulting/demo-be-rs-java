@@ -27,17 +27,17 @@ public class BankAccountsTest extends RestTest {
     public void shouldReachBankAccounts() {
         given()
             .when()
-            .get("/bankaccounts/list/user1")
+            .get("/bankaccounts/user1/list")
             .then()
             .statusCode(200);            
     }
 
     @Test
     public void shouldListBankAccounts() {
-        given().get("/bankaccounts/list/user1").prettyPrint();
+        //given().get("/bankaccounts/user1/list").prettyPrint();
         given()
             .when()
-            .get("/bankaccounts/list/user1")
+            .get("/bankaccounts/user1/list")
             .then()
             .statusCode(200)
             .body("$.size", equalTo(2));

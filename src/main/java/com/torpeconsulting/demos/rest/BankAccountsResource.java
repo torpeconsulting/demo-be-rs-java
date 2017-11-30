@@ -28,10 +28,10 @@ public class BankAccountsResource {
     }
 
     @GET
-    @Path("/list/{owner}")
+    @Path("/{owner}/list")
     @Produces({ "application/json" })
     public Response getAllBankAccounts(@PathParam("owner") String owner) {
-        List<BankAccount> bankaccounts = bankAccountsService.getAllAccounts("user1");
+        List<BankAccount> bankaccounts = bankAccountsService.getAllAccounts(owner);
 
         GenericEntity<List<BankAccount>> entity = new GenericEntity<List<BankAccount>>(bankaccounts) { };
         return Response.ok(entity).build();
