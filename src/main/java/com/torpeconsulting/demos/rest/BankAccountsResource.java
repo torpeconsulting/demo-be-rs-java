@@ -28,12 +28,21 @@ public class BankAccountsResource {
     }
 
     @GET
-    @Path("/{owner}/list")
     @Produces({ "application/json" })
-    public Response getAllBankAccounts(@PathParam("owner") String owner) {
-        List<BankAccount> bankaccounts = bankAccountsService.getAllAccounts(owner);
+    public Response getAllBankAccounts() {
+        List<BankAccount> bankaccounts = bankAccountsService.getAllAccounts("user1");
 
         GenericEntity<List<BankAccount>> entity = new GenericEntity<List<BankAccount>>(bankaccounts) { };
+        return Response.ok(entity).build();
+    }
+
+    @GET
+    @Path("/{iban}")
+    @Produces({ "application/json" })
+    public Response getBankAccount(@PathParam("iban") String iban) {
+        BankAccount bankaccount = bankAccountsService.getAccount("user1", iban);
+
+        GenericEntity<BankAccount> entity = new GenericEntity<BankAccount>(bankaccount) { };
         return Response.ok(entity).build();
     }
 

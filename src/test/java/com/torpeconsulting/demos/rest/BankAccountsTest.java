@@ -27,7 +27,7 @@ public class BankAccountsTest extends RestTest {
     public void shouldReachBankAccounts() {
         given()
             .when()
-            .get("/bankaccounts/user1/list")
+            .get("/bankaccounts")
             .then()
             .statusCode(200);            
     }
@@ -37,9 +37,21 @@ public class BankAccountsTest extends RestTest {
         //given().get("/bankaccounts/user1/list").prettyPrint();
         given()
             .when()
-            .get("/bankaccounts/user1/list")
+            .get("/bankaccounts")
             .then()
             .statusCode(200)
             .body("$.size", equalTo(2));
     }
+
+    @Test
+    public void shouldGetBankAccount() {
+        //given().get("/bankaccounts/user1/list").prettyPrint();
+        given()
+            .when()
+            .get("/bankaccounts/IBAN123123123123123")
+            .then()
+            .statusCode(200);
+            //.body("$.size", equalTo(2));
+    }
+
 }
