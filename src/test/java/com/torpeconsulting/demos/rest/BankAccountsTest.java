@@ -54,4 +54,15 @@ public class BankAccountsTest extends RestTest {
             //.body("$.size", equalTo(2));
     }
 
+    @Test
+    public void shouldFailToGetBankAccount() {
+        //given().get("/bankaccounts/user1/list").prettyPrint();
+        given()
+            .when()
+            .get("/bankaccounts/IBANUNKNOWN")
+            .then()
+            .statusCode(404);
+            //.body("$.size", equalTo(2));
+    }
+
 }

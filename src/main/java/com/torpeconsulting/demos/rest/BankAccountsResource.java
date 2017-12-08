@@ -3,6 +3,7 @@ package com.torpeconsulting.demos.rest;
 import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -41,6 +42,10 @@ public class BankAccountsResource {
     @Produces({ "application/json" })
     public Response getBankAccount(@PathParam("iban") String iban) {
         BankAccount bankaccount = bankAccountsService.getAccount("user1", iban);
+
+        if (bankaccount == null) {
+          throw new NotFoundException();
+        }
 
         GenericEntity<BankAccount> entity = new GenericEntity<BankAccount>(bankaccount) { };
         return Response.ok(entity).build();
