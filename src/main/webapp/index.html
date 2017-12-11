@@ -1,15 +1,56 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>rest-be</title>
+    <title>rest-be</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.css">
 </head>
 <body>
-    <p>Endpoints:
-    <ul>
-    	<li><a href="rest/v1/ping">Ping</a></li>
-    	<li><a href="rest/v1/echo/test">Echo</a></li>
-    	<li><a href="rest/v1/bankaccounts/user1">BankAccounts</a></li>
-    </ul>
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    Backend Demo
+                </h1>
+                <h1 class="subtitle">
+                    Java REST
+                </h1>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div id="app" class="container">   
+            <h1 class="title">
+                Endpoints
+            </h1>
+            <endpoint title="Ping" path="/healthcheck/ping">Ping Me, maybe</endpoint>
+            <endpoint title="User Preferences Ping" path="/prefs/ping">User Preferences</endpoint>
+            <endpoint title="Bank Accounts Ping" path="/bankaccounts/ping">Bank Accounts</endpoint>    
+            <endpoint title="All Bank Accounts" path="/bankaccounts">Bank Accounts</endpoint>    
+            <endpoint title="Single Bank Account" path="/bankaccounts/IBAN123123123123123">Bank Account - IBAN123123123123123</endpoint>            
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="container">
+            <div class="content has-text-centered">
+                <p>
+                    <strong>&copy;&nbsp;Torpe Consulting 2017</strong> by ... and ...</a>.
+                </p>
+                <p>
+                    <span class="icon is-small">
+                        <i class="fa fa-envelope"></i>
+                    </span>
+                    <span class="icon is-small">
+                        <i class="fa fa-twitter"></i>
+                    </span>
+                    <span class="icon is-small">
+                        <i class="fa fa-instagram"></i>
+                    </span>
+                </p>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.9/vue.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>
